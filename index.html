@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
   <script>
     window.fbAsyncInit = function() {
       FB.init({
@@ -37,6 +36,7 @@
        end:
       <input type="date" id="end" />
       <textarea id="html"></textarea>
+      <div id="preview"></div>
       <button onclick="getPosts()">go</button>
     </div>
     
@@ -50,7 +50,7 @@
       
       function populatePosts(posts) {
          console.log(posts)
-         document.getElementById('html').value += posts
+          const html = posts
             .filter(post => post.link && post.link.indexOf('facebook') === -1)
             .map(post => `${post.message}
 <br>
@@ -60,6 +60,8 @@ ${post.attachments.data[0].title}
 <br/>
 <br/>
 `).join('\n\n')
+         document.getElementById('html').value += html
+         document.getElementById('preview').innerHTML += html
       }
       
       function apiCall(link) {
@@ -74,6 +76,9 @@ ${post.attachments.data[0].title}
       function getPosts() {
         const startDate = document.getElementById('start').value
         const endDate = document.getElementById('end').value
+
+        document.getElementById('html').value = ''
+         document.getElementById('preview').innerHTML = ''
 
         const link = '/me/posts?fields=message,permalink_url,attachments{url,title},link&limit=20&since='+startDate+'&until='+endDate
         apiCall(link)
