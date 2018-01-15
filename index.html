@@ -31,14 +31,15 @@
       scope="public_profile,email,user_posts"
       onlogin="checkLoginState();">
     </fb:login-button>
-    <div>
+    <div id="loggedIn" style="display: none;">
       start:
       <input type="date" id="start" />
        end:
       <input type="date" id="end" />
       <textarea id="html"></textarea>
+      <button onclick="getPosts()">go</button>
     </div>
-    <button onclick="getPosts()">go</button>
+    
 
     <script>
       function checkLoginState() {
@@ -81,7 +82,7 @@ ${post.attachments.data[0].title}
       function statusChangeCallback(response) {
         if (response && response.status === 'connected') {
           window.accessToken = response.authResponse.accessToken
-          getPosts()
+          document.getElementById('loggedIn').style.display = 'block'
         }
       }
     </script>
