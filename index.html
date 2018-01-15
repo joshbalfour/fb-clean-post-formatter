@@ -26,10 +26,15 @@
   </script>
   </head>
   <body>
+    
     <fb:login-button 
       scope="public_profile,email,user_posts"
       onlogin="checkLoginState();">
     </fb:login-button>
+    <div>
+      <textarea id="html"></textarea>
+    </div>
+
     <script>
       function checkLoginState() {
         FB.getLoginStatus(function(response) {
@@ -37,13 +42,16 @@
         })
       }
       
+      function populatePosts(posts) {
+         document.getElementById('html').value = posts.map(post => post.message).join('\n')
+      }
       
       function statusChangeCallback(response) {
         if (response && response.status === 'connected') {
           FB.api('/me/posts', 'get', {
             access_token : response.authResponse.accessToken
           }, function(res){
-            console.log(res)
+            populatePosts(res)
           })
         }
       }
