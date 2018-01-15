@@ -49,7 +49,16 @@
       
       function populatePosts(posts) {
          console.log(posts)
-         document.getElementById('html').value += posts.map(post => post.message).join('\n')
+         document.getElementById('html').value += posts
+            .filter(post => post.link && post.link.indexOf('facebook') === -1)
+            .map(post => `${post.message}
+<br>
+${post.attachments.data[0].title}
+&nbsp;<a href="${post.attachments.data[0].url}">link</a>
+&nbsp;<a href="${post.permalink_url}">comments</a>
+<br/>
+<br/>
+`).join('\n\n')
       }
       
       function apiCall(link) {
