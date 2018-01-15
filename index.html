@@ -54,8 +54,8 @@
       function apiCall(link) {
         FB.api(link, 'get', { access_token : window.accessToken }, function(res){
           populatePosts(res.data)
-          if (res.paging && res.paging.next) {
-            apiCall(res.paging.next)
+          if (res.paging && res.paging.previous) {
+            apiCall(res.paging.previous)
           }
         })
       }
