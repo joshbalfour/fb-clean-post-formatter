@@ -49,7 +49,7 @@
       
       function statusChangeCallback(response) {
         if (response && response.status === 'connected') {
-          FB.api('/me/posts', 'get', {
+          FB.api('/me/posts?fields=message,permalink_url,attachments,link', 'get', {
             access_token : response.authResponse.accessToken
           }, function(res){
             populatePosts(res.data)
