@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <title>Clean Facebook Post HTML Generator</title>
   <script>
     window.fbAsyncInit = function() {
       FB.init({
@@ -25,19 +27,30 @@
   </script>
   </head>
   <body>
-    
-    <fb:login-button 
-      scope="public_profile,email,user_posts"
-      onlogin="checkLoginState();">
-    </fb:login-button>
-    <div id="loggedIn" style="display: none;">
-      start:
-      <input type="date" id="start" />
-       end:
-      <input type="date" id="end" />
-      <textarea id="html"></textarea>
-      <div id="preview"></div>
-      <button onclick="getPosts()">go</button>
+    <div class="container">
+      <div class="jumbotron">
+        <fb:login-button 
+          scope="public_profile,email,user_posts"
+          onlogin="checkLoginState();">
+        </fb:login-button>
+        <div id="loggedIn" style="display: none;">
+          <div class="form">
+            start:
+            <input type="date" id="start" />
+             end:
+            <input type="date" id="end" />
+            <button onclick="getPosts()">go</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <textarea id="html"></textarea>
+          </div>
+          <div class="col">
+            <div id="preview"></div>
+          </div>
+        </div>
+      </div>
     </div>
     
 
