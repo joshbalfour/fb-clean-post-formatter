@@ -48,8 +48,8 @@
       }
       
       function populatePosts(posts) {
-        console.log(posts)
-         document.getElementById('html').value = posts.map(post => post.message).join('\n')
+         console.log(posts)
+         document.getElementById('html').value += posts.map(post => post.message).join('\n')
       }
       
       function apiCall(link) {
