@@ -40,10 +40,10 @@
       
       function statusChangeCallback(response) {
         if (response && response.status === 'connected') {
-          FB.api('/me/posts', {
+          FB.api('/me/posts', 'get', {
             access_token : response.authResponse.accessToken
-          }, function(response) {
-            console.log(response)
+          }, function(res){
+            console.log(res)
           })
         }
       }
