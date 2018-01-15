@@ -61,8 +61,9 @@
       }
       
       function getPosts() {
-        const startDate = '2016-12-01'
-        const endDate = '2018-01-15'
+        const startDate = document.getElementById('start').value
+        const endDate = document.getElementById('end').value
+
         const link = '/me/posts?fields=message,permalink_url,attachments{url,title},link&limit=20&since='+startDate+'&until='+endDate
         apiCall(link)
       }
