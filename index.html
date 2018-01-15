@@ -39,7 +39,7 @@
       
       
       function statusChangeCallback(response) {
-        if (response.status === 'connected') {
+        if (response && response.status === 'connected') {
           console.log(response.authResponse.accessToken);
         }
       }
