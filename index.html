@@ -102,8 +102,8 @@
     
 
     <script>
-      document.getElementById('start').value = moment().subtract(1, 'week').format('yyyy-mm-dd')
-      document.getElementById('end').value = moment().format('yyyy-mm-dd')
+      document.getElementById('start').value = moment().subtract(1, 'week').format('YYYY-MM-DD')
+      document.getElementById('end').value = moment().format('YYYY-MM-DD')
 
       function checkLoginState() {
         FB.getLoginStatus(function(response) {
