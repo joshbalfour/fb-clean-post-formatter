@@ -25,6 +25,11 @@
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
   </script>
+  <style>
+    #output {
+      transition: 0.5s opacity;
+    }
+  </style>
   </head>
   <body>
     <div class="container">
@@ -70,7 +75,7 @@
                   </div>
                 </div>
               </div>
-               <div class="row">
+               <div class="row" id="output">
                 <div style="width: 50%; padding: 10px;">
                   <h5>HTML</h5>
                   <textarea id="html" style="width: 100%;"></textarea>
@@ -114,10 +119,12 @@ ${post.attachments.data[0].title}
 
       function completed() {
         document.getElementById('loading').style.display = 'none'
+        document.getElementById('output').style.opacity = 1
       }
 
       function loading() {
         document.getElementById('loading').style.display = 'block'
+        document.getElementById('output').style.opacity = 0.8
       }
       
       function apiCall(link) {
