@@ -25,6 +25,7 @@
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
   <style>
     #output {
       transition: 0.5s opacity;
@@ -101,6 +102,9 @@
     
 
     <script>
+      document.getElementById('start').value = moment().subtract(1, 'week').format('yyyy-mm-dd')
+      document.getElementById('end').value = moment().format('yyyy-mm-dd')
+
       function checkLoginState() {
         FB.getLoginStatus(function(response) {
             statusChangeCallback(response);
@@ -110,11 +114,14 @@
       function populatePosts(posts) {
           const html = posts
             .filter(post => post.link && post.link.indexOf('facebook') === -1)
-            .map(post => `${post.message}
+            .map(post => `
+${post.message}
 <br>
 ${post.attachments.data[0].title}
 &nbsp;<a href="${post.attachments.data[0].url}">link</a>
 &nbsp;<a href="${post.permalink_url}">comments</a>
+<br>
+${moment(post.created_time).format('Do MMMM YYYY, h:mm a')}
 <br/>
 <br/>
 `).join('\n\n')
@@ -152,7 +159,7 @@ ${post.attachments.data[0].title}
         document.getElementById('html').value = ''
         document.getElementById('preview').innerHTML = ''
 
-        const link = '/me/posts?fields=message,permalink_url,attachments{url,title},link&limit=20&since='+startDate+'&until='+endDate
+        const link = '/me/posts?fields=message,permalink_url,attachments{url,title},link,created_time&limit=20&since='+startDate+'&until='+endDate
         apiCall(link)
       }
       
