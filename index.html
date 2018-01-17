@@ -143,10 +143,10 @@ ${moment(post.created_time).format('Do MMMM YYYY, h:mm a')}
         loading()
         FB.api(link, 'get', { access_token : window.accessToken }, function(res){
           populatePosts(res.data)
-          if (res.paging && res.paging.previous) {
-            apiCall(res.paging.previous)
+          if (res.paging && res.paging.next) {
+            apiCall(res.paging.next)
           }
-          if (!res.data || !res.data.length === 0 || !res.paging || !res.paging.previous) {
+          if (!res.data || !res.data.length === 0 || !res.paging || !res.paging.next) {
             completed()
           }
         })
